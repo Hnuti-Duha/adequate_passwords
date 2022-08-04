@@ -1,0 +1,5 @@
+{
+  "name": "drupal/adequate_passwords",
+  "description": "Password validation to match Drupal's password suggestions.",
+  "type": "drupal-module"
+}
