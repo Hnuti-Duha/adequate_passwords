@@ -45,6 +45,8 @@ class AdequatePasswordsSettingsForm extends ConfigFormBase {
     ];
 
     $options = [];
+
+    /** @var \Drupal\user\RoleInterface $roles */
     $roles = \Drupal::entityTypeManager()->getStorage('user_role')->loadMultiple();
     foreach ($roles as $role) {
       $options[$role->id()] = $role->label();
@@ -65,12 +67,12 @@ class AdequatePasswordsSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state)
-  {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->config('adequate_passwords.settings')
       ->set('strength', $form_state->getValue('strength'))
       ->set('roles', array_filter($form_state->getValue('roles')))
       ->save();
     parent::submitForm($form, $form_state);
   }
+
 }
