@@ -61,6 +61,12 @@ class AdequatePasswordsSettingsForm extends ConfigFormBase {
       '#multiple' => TRUE,
     ];
 
+    $form['enable_adequate_message'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Enable message when password is adequate.'),
+      '#default_value' => $config->get('enable_adequate_message')
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -71,6 +77,7 @@ class AdequatePasswordsSettingsForm extends ConfigFormBase {
     $this->config('adequate_passwords.settings')
       ->set('strength', $form_state->getValue('strength'))
       ->set('roles', array_filter($form_state->getValue('roles')))
+      ->set('enable_adequate_message', $form_state->getValue('enable_adequate_message'))
       ->save();
     parent::submitForm($form, $form_state);
   }
